@@ -98,7 +98,13 @@ const TaskFormModal: React.FC<TaskFormModalProps> = ({ isOpen, onClose, onSucces
       onSuccess();
       onClose();
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to save task');
+      console.error('Failed to save task:', err);
+      console.error('Error response:', err.response?.data);
+      const errorMsg = err.response?.data?.message ||
+                       err.response?.data?.errors ||
+                       err.response?.data?.title ||
+                       'Failed to save task';
+      setError(typeof errorMsg === 'object' ? JSON.stringify(errorMsg) : errorMsg);
     } finally {
       setLoading(false);
     }
