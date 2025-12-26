@@ -1,0 +1,39 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Documentation
+README.md
+DEPLOYMENT.md
+*.md
+
+# CI/CD
+.github
+
+# Frontend (not needed for backend)
+frontend/
+
+# .NET
+**/bin/
+**/obj/
+**/out/
+**/publish/
+*.db
+*.db-shm
+*.db-wal
+
+# IDE
+.vscode/
+.vs/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+**/Logs/
+*.log
