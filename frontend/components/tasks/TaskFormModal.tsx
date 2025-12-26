@@ -85,8 +85,8 @@ const TaskFormModal: React.FC<TaskFormModalProps> = ({ isOpen, onClose, onSucces
         status: formData.status,
         priority: formData.priority,
         dueDate: formData.dueDate ? `${formData.dueDate}T00:00:00Z` : null,
-        projectId: formData.projectId || null,
-        assignedToId: formData.assignedToId || null,
+        projectId: formData.projectId && formData.projectId.trim() !== '' ? formData.projectId : null,
+        assignedToId: formData.assignedToId && formData.assignedToId.trim() !== '' ? formData.assignedToId : null,
       };
 
       if (task) {
