@@ -34,7 +34,7 @@ export default function TasksPage() {
     fetchTasks();
   }, []);
 
-  const handleDelete = async (taskId: number) => {
+  const handleDelete = async (taskId: string) => {
     if (!confirm('Are you sure you want to delete this task?')) {
       return;
     }
@@ -66,7 +66,7 @@ export default function TasksPage() {
     fetchTasks();
   };
 
-  const handleStatusChange = async (taskId: number, status: TaskStatus) => {
+  const handleStatusChange = async (taskId: string, status: TaskStatus) => {
     try {
       const updatedTask = await tasksApi.updateTask(taskId, { status });
       setTasks(tasks.map((task) => (task.id === taskId ? updatedTask : task)));

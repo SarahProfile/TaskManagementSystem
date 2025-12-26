@@ -34,7 +34,7 @@ export default function ProjectsPage() {
     fetchProjects();
   }, []);
 
-  const handleDelete = async (projectId: number) => {
+  const handleDelete = async (projectId: string) => {
     if (!confirm('Are you sure you want to delete this project?')) {
       return;
     }

@@ -40,25 +40,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       const response = await authApi.login(credentials);
 
-      if (response.success && response.data) {
-        localStorage.setItem('access_token', response.data.token);
-        localStorage.setItem('user', JSON.stringify({
-          userId: response.data.userId,
-          email: response.data.email,
-          firstName: response.data.firstName,
-          lastName: response.data.lastName,
-          role: response.data.role,
-        }));
-        setUser({
-          userId: response.data.userId,
-          email: response.data.email,
-          firstName: response.data.firstName,
-          lastName: response.data.lastName,
-          role: response.data.role,
-        });
+      if (response && response.access_token) {
+        localStorage.setItem('access_token', response.access_token);
+        localStorage.setItem('user', JSON.stringify(response.user));
+        setUser(response.user);
         router.push('/dashboard');
       } else {
-        throw new Error(response.message || 'Login failed');
+        throw new Error('Login failed');
       }
     } catch (error: any) {
       console.error('Login error:', error);
@@ -74,25 +62,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       const response = await authApi.register(data);
 
-      if (response.success && response.data) {
-        localStorage.setItem('access_token', response.data.token);
-        localStorage.setItem('user', JSON.stringify({
-          userId: response.data.userId,
-          email: response.data.email,
-          firstName: response.data.firstName,
-          lastName: response.data.lastName,
-          role: response.data.role,
-        }));
-        setUser({
-          userId: response.data.userId,
-          email: response.data.email,
-          firstName: response.data.firstName,
-          lastName: response.data.lastName,
-          role: response.data.role,
-        });
+      if (response && response.access_token) {
+        localStorage.setItem('access_token', response.access_token);
+        localStorage.setItem('user', JSON.stringify(response.user));
+        setUser(response.user);
         router.push('/dashboard');
       } else {
-        throw new Error(response.message || 'Registration failed');
+        throw new Error('Registration failed');
       }
     } catch (error: any) {
       console.error('Registration error:', error);

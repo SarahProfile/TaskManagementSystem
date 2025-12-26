@@ -8,8 +8,8 @@ interface TaskListProps {
   tasks: Task[];
   isLoading?: boolean;
   onEdit?: (task: Task) => void;
-  onDelete?: (taskId: number) => void;
-  onStatusChange?: (taskId: number, status: TaskStatus) => void;
+  onDelete?: (taskId: string) => void;
+  onStatusChange?: (taskId: string, status: TaskStatus) => void;
 }
 
 const TaskList: React.FC<TaskListProps> = ({

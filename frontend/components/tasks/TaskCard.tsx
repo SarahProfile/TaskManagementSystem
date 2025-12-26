@@ -8,8 +8,8 @@ import { Task, TaskStatus, TaskPriority } from '@/lib/types/task.types';
 interface TaskCardProps {
   task: Task;
   onEdit?: (task: Task) => void;
-  onDelete?: (taskId: number) => void;
-  onStatusChange?: (taskId: number, status: TaskStatus) => void;
+  onDelete?: (taskId: string) => void;
+  onStatusChange?: (taskId: string, status: TaskStatus) => void;
 }
 
 const TaskCard: React.FC<TaskCardProps> = ({ task, onEdit, onDelete, onStatusChange }) => {

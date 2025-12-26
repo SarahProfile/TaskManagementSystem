@@ -80,7 +80,7 @@ const RegisterForm: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const { confirmPassword, username, ...registerData } = formData;
+      const { confirmPassword, ...registerData } = formData;
       await register(registerData);
     } catch (err: any) {
       const errorMessage = err.message || err.response?.data?.message || 'Registration failed. Please try again.';
