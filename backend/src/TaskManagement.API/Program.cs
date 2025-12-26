@@ -15,6 +15,10 @@ using TaskManagement.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configure port for Railway and other cloud platforms
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5162";
+builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+
 // Configure Serilog
 Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
