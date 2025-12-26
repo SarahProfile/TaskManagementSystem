@@ -11,13 +11,16 @@ namespace TaskManagement.Application.Services;
 public class ProjectService : IProjectService
 {
     private readonly IProjectRepository _projectRepository;
+    private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
 
     public ProjectService(
         IProjectRepository projectRepository,
+        IUserRepository userRepository,
         IMapper mapper)
     {
         _projectRepository = projectRepository;
+        _userRepository = userRepository;
         _mapper = mapper;
     }
 
@@ -55,6 +58,13 @@ public class ProjectService : IProjectService
 
     public async Task<ProjectDto> CreateProjectAsync(CreateProjectDto createProjectDto, Guid createdById)
     {
+        // Verify user exists
+        var user = await _userRepository.GetByIdAsync(createdById);
+        if (user == null)
+        {
+            throw new NotFoundException($"User with ID {createdById} not found. Please log in again.");
+        }
+
         // Map DTO to entity
         var project = _mapper.Map<Project>(createProjectDto);
         project.CreatedById = createdById;
