@@ -22,8 +22,13 @@ export interface RegisterRequest {
 }
 
 export interface AuthResponse {
-  access_token: string;
-  user: User;
+  userId: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  role: string;
+  token: string;
+  expiresAt?: string;
 }
 
 export interface AuthContextType {

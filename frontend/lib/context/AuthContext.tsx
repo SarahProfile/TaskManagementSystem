@@ -40,10 +40,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       const response = await authApi.login(credentials);
 
-      if (response && response.access_token) {
-        localStorage.setItem('access_token', response.access_token);
-        localStorage.setItem('user', JSON.stringify(response.user));
-        setUser(response.user);
+      if (response && response.token) {
+        localStorage.setItem('access_token', response.token);
+        const user = {
+          id: 0, // Not used
+          email: response.email,
+          username: response.email.split('@')[0],
+          firstName: response.firstName,
+          lastName: response.lastName,
+        };
+        localStorage.setItem('user', JSON.stringify(user));
+        setUser(user);
         router.push('/dashboard');
       } else {
         throw new Error('Login failed');
@@ -62,10 +69,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       const response = await authApi.register(data);
 
-      if (response && response.access_token) {
-        localStorage.setItem('access_token', response.access_token);
-        localStorage.setItem('user', JSON.stringify(response.user));
-        setUser(response.user);
+      if (response && response.token) {
+        localStorage.setItem('access_token', response.token);
+        const user = {
+          id: 0, // Not used
+          email: response.email,
+          username: data.username,
+          firstName: response.firstName,
+          lastName: response.lastName,
+        };
+        localStorage.setItem('user', JSON.stringify(user));
+        setUser(user);
         router.push('/dashboard');
       } else {
         throw new Error('Registration failed');
