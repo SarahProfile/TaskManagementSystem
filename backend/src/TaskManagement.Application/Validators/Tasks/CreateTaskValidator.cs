@@ -7,8 +7,7 @@ public class CreateTaskValidator : AbstractValidator<CreateTaskDto>
 {
     public CreateTaskValidator()
     {
-        RuleFor(x => x.ProjectId)
-            .NotEmpty().WithMessage("Project ID is required");
+        // ProjectId is optional - tasks can exist without a project
 
         RuleFor(x => x.Title)
             .NotEmpty().WithMessage("Title is required")
