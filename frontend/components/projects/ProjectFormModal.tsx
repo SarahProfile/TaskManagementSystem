@@ -82,7 +82,13 @@ const ProjectFormModal: React.FC<ProjectFormModalProps> = ({ isOpen, onClose, on
       onSuccess();
       onClose();
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Failed to save project');
+      console.error('Failed to save project:', err);
+      console.error('Error response:', err.response?.data);
+      const errorMsg = err.response?.data?.message ||
+                       err.response?.data?.errors ||
+                       err.response?.data?.title ||
+                       'Failed to save project';
+      setError(typeof errorMsg === 'object' ? JSON.stringify(errorMsg) : errorMsg);
     } finally {
       setLoading(false);
     }
